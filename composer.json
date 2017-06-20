@@ -1,0 +1,21 @@
+{
+  "name": "mdm23/projdoc",
+  "description": "",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Peter Frank",
+      "email": "mdm23@gmx.de"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "MDM23\\Projdoc\\": "lib/"
+    }
+  },
+  "require": {},
+  "suggest": {
+    "laravel/laravel": "Serve your developer documentation through Laravel"
+  }
+}
