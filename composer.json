@@ -14,7 +14,10 @@
       "MDM23\\Projdoc\\": "lib/"
     }
   },
-  "require": {},
+  "require": {
+    "erusev/parsedown": "^1.6",
+    "symfony/yaml": "^3.3"
+  },
   "suggest": {
     "laravel/laravel": "Serve your developer documentation through Laravel"
   }

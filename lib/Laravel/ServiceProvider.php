@@ -8,10 +8,25 @@ class ServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__ . "/../../resources/config.php",
+            "projdoc"
+        );
     }
 
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__ . "/routes.php");
+        if (!$this->app->routesAreCached()) {
+            require __DIR__ . "/../../resources/routes.php";
+        }
+
+        $this->publishes([
+            __DIR__ . "/../../resources/config.php" => config_path("projdoc.php")
+        ]);
+
+        $this->loadViewsFrom(
+            __DIR__ . "/../../resources/views",
+            "projdoc"
+        );
     }
 }
