@@ -12,11 +12,22 @@
   "autoload": {
     "psr-4": {
       "MDM23\\Projdoc\\": "lib/"
-    }
+    },
+    "files": [
+      "lib/helper.php"
+    ]
+  },
+  "autoload-dev": {
+    "files": [
+    ]
   },
   "require": {
     "erusev/parsedown": "^1.6",
     "symfony/yaml": "^3.3"
+  },
+  "require-dev": {
+    "phpspec/phpspec": "^3.4",
+    "laravel/laravel": "^5.1"
   },
   "suggest": {
     "laravel/laravel": "Serve your developer documentation through Laravel"

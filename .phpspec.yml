@@ -1,0 +1,4 @@
+suites:
+  acme_suite:
+    namespace: MDM23\Projdoc
+    psr4_prefix: MDM23\Projdoc
