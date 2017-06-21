@@ -35,10 +35,14 @@ class Controller extends BaseController
         $this->viewFactory = $viewFactory;
     }
 
-    public function serve($url = "/")
+    public function serve($url = "")
     {
         $filePath = join_paths($this->config->get("projdoc.sources"), $url);
         $requestedDirectory = "/" === substr($url, -1);
+
+        if (!$requestedDirectory and $this->filesystem->isFile($filePath)) {
+            return $this->serveAsset($filePath);
+        }
 
         if (!$requestedDirectory and $this->filesystem->exists($filePath . ".md")) {
             return $this->serveMarkdown($filePath . ".md");
@@ -60,25 +64,6 @@ class Controller extends BaseController
         }
 
         return $this->serveMarkdown($foundIndexFile);
-
-        /*
-        $images = [
-            "gif"  => "image/gif",
-            "jpg"  => "image/jpeg",
-            "jpeg" => "image/jpeg",
-            "png"  => "image/png",
-            "svg"  => "image/svg+xml",
-        ];
-
-        if (is_file($file)) {
-            $ext = pathinfo($file, PATHINFO_EXTENSION);
-
-            if (array_key_exists($ext, $images)) {
-                return response(File::get($file))
-                    ->header("Content-Type", $images[$ext]);
-            }
-        }
-        */
     }
 
     private function firstExistantFile($haystack)
@@ -110,5 +95,13 @@ class Controller extends BaseController
                     "meta" => $meta
                 ]
             );
+    }
+
+    private function serveAsset($file)
+    {
+        return response($this->filesystem->get($file))->header(
+            "Content-Type",
+            $this->filesystem->mimeType($file)
+        );
     }
 }
