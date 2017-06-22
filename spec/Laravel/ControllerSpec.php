@@ -58,6 +58,10 @@ class ControllerSpec extends ObjectBehavior
             return array_key_exists($args[0], $self->fileCache);
         });
 
+        $this->filesystem->isFile(Argument::type("string"))->will(function ($args) use ($self) {
+            return array_key_exists($args[0], $self->fileCache);
+        });
+
         $this->filesystem->get(Argument::type("string"))->will(function ($args) use ($self) {
             return $self->fileCache[$args[0]];
         });
