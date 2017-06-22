@@ -4,5 +4,13 @@ setup:
 test:
   php_spec:
   php_mess_detector:
+    path: "lib"
     ignore:
       - vendor
+    rules:
+      - cleancode
+      - controversial
+      - codesize
+      - design
+      - naming
+      - unusedcode
