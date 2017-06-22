@@ -27,7 +27,8 @@
   },
   "require-dev": {
     "phpspec/phpspec": "^3.4",
-    "laravel/laravel": "^5.1"
+    "laravel/laravel": "^5.1",
+    "phpmd/phpmd": "^2.6"
   },
   "suggest": {
     "laravel/laravel": "Serve your developer documentation through Laravel"

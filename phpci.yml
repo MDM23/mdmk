@@ -3,3 +3,6 @@ setup:
 
 test:
   php_spec:
+  php_mess_detector:
+    ignore:
+      - vendor
