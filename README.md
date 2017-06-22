@@ -1,5 +1,7 @@
 # Projdoc
 
+![phpci status](https://phpci.azide.de/build-status/image/1)
+
 ## Roadmap
 
 - [ ] Documentation
