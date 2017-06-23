@@ -12,7 +12,7 @@ use Illuminate\View\View;
 use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Parsedown;
+use ParsedownExtra as Parsedown;
 use RuntimeException;
 
 class ControllerSpec extends ObjectBehavior

@@ -23,7 +23,8 @@
   },
   "require": {
     "erusev/parsedown": "^1.6",
-    "symfony/yaml": "^3.3"
+    "symfony/yaml": "^3.3",
+    "erusev/parsedown-extra": "^0.7.1"
   },
   "require-dev": {
     "phpspec/phpspec": "^3.4",

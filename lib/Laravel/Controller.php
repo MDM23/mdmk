@@ -11,7 +11,7 @@ use Illuminate\View\Factory as ViewFactory;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Yaml\Yaml;
 use File;
-use Parsedown;
+use ParsedownExtra as Parsedown;
 
 class Controller extends BaseController
 {
