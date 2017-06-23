@@ -13,6 +13,15 @@
     <link rel="stylesheet" href="https://cdn.rawgit.com/thomaspark/bootswatch/v4/materia/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <style type="text/css">
+      *[id]:before {
+        display: block;
+        content: " ";
+        margin-top: -75px;
+        height: 75px;
+        visibility: hidden;
+      }
+    </style>
   </head>
   <body class="pb-5">
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary sticky-top mb-5">
