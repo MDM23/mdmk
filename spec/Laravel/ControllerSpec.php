@@ -7,26 +7,22 @@ use MDM23\Projdoc\Laravel\Controller;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\View\View;
+use ParsedownExtra as Parsedown;
 use PhpSpec\Exception\Example\FailureException;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use ParsedownExtra as Parsedown;
 use RuntimeException;
 
 class ControllerSpec extends ObjectBehavior
 {
     private $config;
-
     private $filesystem;
-
     private $parsedown;
-
     private $viewFactory;
-
     private $view;
-
     private $fileCache = [];
 
     function let(
@@ -138,6 +134,38 @@ class ControllerSpec extends ObjectBehavior
         $result->getTargetUrl()->shouldEqual("/doc/child/");
     }
 
+    function it_serves_vendor_assets()
+    {
+        $this->hasVendorAsset("foo-theme.css");
+
+        $result = $this->serve("/\$assets/foo-theme.css");
+        $result->shouldBeAnInstanceOf(Response::class);
+        $responseMime = $result->getWrappedObject()->headers->get("Content-Type");
+
+        if ("text/css" !== $responseMime) {
+            throw new FailureException(sprintf(
+                "Expected response to have mime type text/css. Got: %s",
+                $responseMime
+            ));
+        }
+    }
+
+    function it_serves_project_assets()
+    {
+        $this->hasFile("images/graphic.svg", "");
+
+        $result = $this->serve("/images/graphic.svg");
+        $result->shouldBeAnInstanceOf(Response::class);
+        $responseMime = $result->getWrappedObject()->headers->get("Content-Type");
+
+        if ("image/svg+xml" !== $responseMime) {
+            throw new FailureException(sprintf(
+                "Expected response to have mime type image/svg+xml. Got: %s",
+                $responseMime
+            ));
+        }
+    }
+
     public function getMatchers()
     {
         return [
@@ -175,5 +203,15 @@ class ControllerSpec extends ObjectBehavior
     {
         $realPath = join_paths("/some-folder/src/", $path);
         $this->fileCache[$realPath] = $content;
+    }
+
+    private function hasVendorAsset($path)
+    {
+        $realPath = join_paths(
+            realpath(__DIR__ . "/../../resources/assets"),
+            $path
+        );
+
+        $this->fileCache[$realPath] = "asset-stub";
     }
 }

@@ -10,18 +10,9 @@
     <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
     <meta http-equiv="pragma" content="no-cache" />
     <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <link rel="stylesheet" href="https://cdn.rawgit.com/thomaspark/bootswatch/v4/materia/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <style type="text/css">
-      *[id]:before {
-        display: block;
-        content: " ";
-        margin-top: -75px;
-        height: 75px;
-        visibility: hidden;
-      }
-    </style>
+    <link rel="stylesheet" href="{{ $meta['base'] }}/$assets/theme.css" />
+    <link rel="stylesheet" href="{{ $meta['base'] }}/$assets/atom-one-light.min.css" />
+    <script src="{{ $meta['base'] }}/$assets/jquery-3.2.1.slim.min.js"></script>
   </head>
   <body class="pb-5">
     <nav class="navbar navbar-toggleable-md navbar-inverse bg-primary sticky-top mb-5">
@@ -48,9 +39,9 @@
         </div>
       </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+    <script src="{{ $meta['base'] }}/$assets/tether.min.js"></script>
+    <script src="{{ $meta['base'] }}/$assets/bootstrap.min.js"></script>
+    <script src="{{ $meta['base'] }}/$assets/highlight.min.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
   </body>
 </html>

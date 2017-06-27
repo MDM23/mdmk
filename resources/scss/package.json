@@ -1,0 +1,12 @@
+{
+  "dependencies": {
+    "bootstrap": "next",
+    "bootswatch": "next"
+  },
+  "devDependencies": {
+    "node-sass": "^4.5.3"
+  },
+  "scripts": {
+    "build": "node-sass --output-style compressed --include-path node_modules index.scss > ../assets/theme.css"
+  }
+}

@@ -33,5 +33,8 @@
   },
   "suggest": {
     "laravel/laravel": "Serve your developer documentation through Laravel"
+  },
+  "scripts": {
+    "build:theme": "cd resources/scss && yarn build"
   }
 }

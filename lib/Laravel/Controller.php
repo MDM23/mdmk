@@ -7,6 +7,7 @@ use Illuminate\Config\Repository as Config;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Response;
 use Illuminate\View\Factory as ViewFactory;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Yaml\Yaml;
@@ -39,6 +40,15 @@ class Controller extends BaseController
     {
         $filePath = join_paths($this->config->get("projdoc.sources"), $url);
         $requestedDirectory = "/" === substr($url, -1);
+
+        if (preg_match("#^/\\\$assets(/.*)$#", $url, $matches)) {
+            $assetPath = join_paths(
+                realpath(__DIR__ . "/../../resources/assets"),
+                $matches[1]
+            );
+
+            return $this->serveAsset($assetPath);
+        }
 
         if (!$requestedDirectory and $this->filesystem->isFile($filePath)) {
             return $this->serveAsset($filePath);
@@ -99,9 +109,33 @@ class Controller extends BaseController
 
     private function serveAsset($file)
     {
-        return response($this->filesystem->get($file))->header(
-            "Content-Type",
-            $this->filesystem->mimeType($file)
-        );
+        if (!$this->filesystem->isFile($file)) {
+            throw new NotFoundHttpException();
+        }
+
+        $response = new Response($this->filesystem->get($file));
+        $response->header("Content-Type", $this->guessMimeType($file));
+
+        return $response;
+    }
+
+    private function guessMimeType($filename)
+    {
+        $mimeTypes = [
+            "jp(e?)g" => "image/jpeg",
+            "gif"     => "image/gif",
+            "png"     => "image/png",
+            "svg"     => "image/svg+xml",
+            "css"     => "text/css",
+            "js"      => "application/javascript",
+        ];
+
+        foreach ($mimeTypes as $regex => $mimeType) {
+            if (preg_match("/\." . $regex . "\$/i", $filename)) {
+                return $mimeType;
+            }
+        }
+
+        return $this->filesystem->mimeType($filename);
     }
 }
