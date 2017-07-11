@@ -30,11 +30,11 @@
     <main class="container">
       {!! $content !!}
     </main>
-    <div class="container-fluid fixed-bottom bg-faded">
+    <div class="projdoc-footer container-fluid fixed-bottom bg-faded">
       <div class="row">
-        <div class="col text-center py-2">
+        <div class="col text-right py-2">
           <a target="_blank" href="https://github.com/MDM23/projdoc" class="text-muted">
-            Powered by Projdoc
+            <small>Powered by Projdoc</small>
           </a>
         </div>
       </div>
