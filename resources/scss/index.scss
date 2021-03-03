@@ -1,4 +1,6 @@
-@import "bootswatch/materia/variables";
+@use "sass:map";
+
+@import "bootswatch/dist/materia/variables";
 
 $font-size-base: 0.9rem;
 
@@ -19,10 +21,10 @@ $container-max-widths: (
 );
 
 @import "bootstrap/scss/bootstrap";
-@import "bootswatch/materia/bootswatch";
+@import "bootswatch/dist/materia/bootswatch";
 
 h1, h2, h3, h4, h5 {
-  margin: ($spacer-y * 2) 0;
+  margin: map.get($spacers, 4) 0;
 }
 
 *[id]:before {

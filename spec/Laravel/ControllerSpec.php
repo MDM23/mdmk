@@ -3,11 +3,11 @@
 namespace spec\MDM23\Projdoc\Laravel;
 
 use function MDM23\Projdoc\join_paths;
-use MDM23\Projdoc\Laravel\Controller;
 use Illuminate\Config\Repository as Config;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Response;
+use Illuminate\Support\Arr;
 use Illuminate\View\Factory as ViewFactory;
 use Illuminate\View\View;
 use ParsedownExtra as Parsedown;
@@ -166,7 +166,7 @@ class ControllerSpec extends ObjectBehavior
         }
     }
 
-    public function getMatchers()
+    public function getMatchers(): array
     {
         return [
             "haveInArray" => function ($subject, $path, $value) {
@@ -177,7 +177,7 @@ class ControllerSpec extends ObjectBehavior
                     ));
                 }
 
-                $realValue = array_get($subject, $path);
+                $realValue = Arr::get($subject, $path);
 
                 if (!is_scalar($realValue) or !is_scalar($value)) {
                     throw new RuntimeException(
